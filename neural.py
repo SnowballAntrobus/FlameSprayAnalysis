@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn import model_selection
 from keras.models import Sequential
 from keras.layers import Dense
 
@@ -8,7 +9,7 @@ df = pd.read_csv(input_file, header = 0)
 # split into input (X) and output (y) variables
 dataset = df.values
 X = dataset[:,1:7]
-#y = dataset[:,7]
+y = dataset[:,7]
 # split data into train, cross and test sets
 X_train, X_temp, y_train, y_temp = model_selection.train_test_split(X, y, train_size=.6, random_state=1)
 X_cross, X_test, y_cross, y_test = model_selection.train_test_split(X_temp, y_temp, train_size=.5, random_state=1)
