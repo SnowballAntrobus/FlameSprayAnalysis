@@ -176,4 +176,4 @@ def evaluate(columns):
     if clf.best_score_:
         a = clf.best_score_
 
-    return a
+    return a,
