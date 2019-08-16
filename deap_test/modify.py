@@ -11,55 +11,55 @@ def translate(arr):
     s_arr = []
     if arr[0] == 1:
         s_arr.append('LFR')
-    elif arr[1] == 1:
+    if arr[1] == 1:
         s_arr.append('AO2')
-    elif arr[2] == 1:
+    if arr[2] == 1:
         s_arr.append('SO2')
-    elif arr[3] == 1:
+    if arr[3] == 1:
         s_arr.append('ER1')
-    elif arr[4] == 1:
+    if arr[4] == 1:
         s_arr.append('ER2')
-    elif arr[5] == 1:
+    if arr[5] == 1:
         s_arr.append('BCT')
-    elif arr[6] == 1:
+    if arr[6] == 1:
         s_arr.append('LFR*LFR')
-    elif arr[7] == 1:
+    if arr[7] == 1:
         s_arr.append('LFR*AO2')
-    elif arr[8] == 1:
+    if arr[8] == 1:
         s_arr.append('LFR*SO2')
-    elif arr[9] == 1:
+    if arr[9] == 1:
         s_arr.append('LFR*ER1')
-    elif arr[10] == 1:
+    if arr[10] == 1:
         s_arr.append('LFR*ER2')
-    elif arr[11] == 1:
+    if arr[11] == 1:
         s_arr.append('LFR*BCT')
-    elif arr[12] == 1:
+    if arr[12] == 1:
         s_arr.append('AO2*SO2')
-    elif arr[13] == 1:
+    if arr[13] == 1:
         s_arr.append('AO2*ER1')
-    elif arr[14] == 1:
+    if arr[14] == 1:
         s_arr.append('AO2*ER2')
-    elif arr[15] == 1:
+    if arr[15] == 1:
         s_arr.append('AO2*BCT')
-    elif arr[16] == 1:
+    if arr[16] == 1:
         s_arr.append('SO2*SO2')
-    elif arr[17] == 1:
+    if arr[17] == 1:
         s_arr.append('SO2*ER1')
-    elif arr[18] == 1:
+    if arr[18] == 1:
         s_arr.append('SO2*ER2')
-    elif arr[19] == 1:
+    if arr[19] == 1:
         s_arr.append('SO2*BCT')
-    elif arr[20] == 1:
+    if arr[20] == 1:
         s_arr.append('ER1*ER1')
-    elif arr[21] == 1:
+    if arr[21] == 1:
         s_arr.append('ER1*ER2')
-    elif arr[22] == 1:
+    if arr[22] == 1:
         s_arr.append('ER1*BCT')
-    elif arr[23] == 1:
+    if arr[23] == 1:
         s_arr.append('ER2*ER2')
-    elif arr[24] == 1:
+    if arr[24] == 1:
         s_arr.append('ER2*BCT')
-    elif arr[25] == 1:
+    if arr[25] == 1:
         s_arr.append('BCT*BCT')
     return s_arr
 
