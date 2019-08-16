@@ -139,7 +139,7 @@ def modify(input_file, columns):
 
 
 def evaluate(columns):
-    modify("data.csv", columns)
+    modify("data.csv", translate(columns))
 
     df = pd.read_csv("modified.csv", header=0)
 
