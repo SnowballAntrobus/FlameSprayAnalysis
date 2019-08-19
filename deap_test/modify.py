@@ -179,7 +179,7 @@ def evaluate(columns):
         a = clf.best_score_
         p = clf.best_params_
 
-    return a
+    return a,
 
 
 def evaluate_test(columns):
