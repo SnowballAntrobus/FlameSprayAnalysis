@@ -211,7 +211,7 @@ def evaluate_test(columns):
     svc = SVC()
     clf = GridSearchCV(svc, parameters, cv=loo)
     clf.fit(X_train, y_train)
-    if clf.best_score_ > a:
+    if clf.best_score_ > a[0]:
         a = (clf.best_score_, 1)
         p = clf.best_params_
 
@@ -219,7 +219,7 @@ def evaluate_test(columns):
     knn = KNeighborsClassifier()
     clf = GridSearchCV(knn, parameters, cv=loo)
     clf.fit(X_train, y_train)
-    if clf.best_score_ > a:
+    if clf.best_score_ > a[0]:
         a = (clf.best_score_, 2)
         p = clf.best_params_
 
