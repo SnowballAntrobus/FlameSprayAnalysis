@@ -161,19 +161,84 @@ def evaluate(columns):
     clf = GridSearchCV(log, parameters, cv=loo)
     clf.fit(X_train, y_train)
     a = clf.best_score_
+    p = clf.best_params_
 
     parameters = {'kernel': ['rbf', 'linear', 'poly'], 'C': [1, 100, 1000]}
     svc = SVC(gamma="scale")
     clf = GridSearchCV(svc, parameters, cv=loo)
     clf.fit(X_train, y_train)
-    if clf.best_score_:
+    if clf.best_score_ > a:
         a = clf.best_score_
+        p = clf.best_params_
 
     parameters = {'n_neighbors': [2, 3, 4, 5, 6], 'p': [1, 2]}
     knn = KNeighborsClassifier()
     clf = GridSearchCV(knn, parameters, cv=loo)
     clf.fit(X_train, y_train)
-    if clf.best_score_:
+    if clf.best_score_ > a:
         a = clf.best_score_
+        p = clf.best_params_
 
-    return a,
+    return a
+
+
+def evaluate_test(columns):
+    modify("data.csv", translate(columns))
+
+    df = pd.read_csv("modified.csv", header=0)
+
+    dataset = df.values
+    X = dataset[:, 1:]
+    y = dataset[:, 0]
+    y = y.astype('int')
+
+    scale = StandardScaler().fit(X)
+    X_std = scale.transform(X)
+
+    X_train, X_test, y_train, y_test = train_test_split(X_std, y, train_size=.9)
+
+    loo = LeaveOneOut()
+    loo.get_n_splits(X_train)
+
+    parameters = {'solver': ['newton-cg', 'lbfgs', 'liblinear'], 'C': [1, 100, 1000], 'max_iter': [1000]}
+    log = LogisticRegression()
+    clf = GridSearchCV(log, parameters, cv=loo)
+    clf.fit(X_train, y_train)
+    a = (clf.best_score_, 0)
+    p = clf.best_params_
+
+    parameters = {'kernel': ['rbf', 'linear', 'poly'], 'C': [1, 100, 1000], 'gamma': ['scale']}
+    svc = SVC()
+    clf = GridSearchCV(svc, parameters, cv=loo)
+    clf.fit(X_train, y_train)
+    if clf.best_score_ > a:
+        a = (clf.best_score_, 1)
+        p = clf.best_params_
+
+    parameters = {'n_neighbors': [2, 3, 4, 5, 6], 'p': [1, 2]}
+    knn = KNeighborsClassifier()
+    clf = GridSearchCV(knn, parameters, cv=loo)
+    clf.fit(X_train, y_train)
+    if clf.best_score_ > a:
+        a = (clf.best_score_, 2)
+        p = clf.best_params_
+
+    print(p)
+    print(a)
+
+    if a[1] == 0:
+        log = LogisticRegression(**p)
+        log.fit(X_train, y_train)
+        print("Log:", log.score(X_test, y_test))
+
+    elif a[1] == 1:
+        svc = SVC(**p)
+        svc.fit(X_train, y_train)
+        print("SVC:", svc.score(X_test, y_test))
+
+    elif a[1] == 2:
+        knn = KNeighborsClassifier(**p)
+        knn.fit(X_train, y_train)
+        print("KNN:", knn.score(X_test, y_test))
+
+    return
